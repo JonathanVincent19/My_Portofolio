@@ -567,7 +567,7 @@ function Navbar() {
                 {/* 16:9 wide preview area */}
                 <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden border border-white/5 bg-gradient-to-b from-slate-800/60 to-slate-900/60">
                 <img
-                    src="/public/Por2.png"
+                    src="/Por2.png" 
                     alt="Preview"
                     className="absolute inset-0 h-full w-full object-cover"
                   />
