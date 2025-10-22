@@ -165,7 +165,7 @@ function Navbar() {
                 whileInView={{ opacity: 1 }}
                 transition={{delay: 0.55, duration: 0.5 }}
                 variants={{ hidden: { y: 12, opacity: 0 }, show: { y: 0, opacity: 1 } }}
-                href="/Users/jonathanvincent/my-portfolio/my-portfolio/public/Jonathan_Vincent_CV.pdf" 
+                href="/Jonathan_Vincent_CV.pdf" 
                 download="Jonathan_Vincent_CV.pdf"
                 className="px-5 py-2 rounded-full btn-primary hover:bg-[--color-accent-600]"
               >
