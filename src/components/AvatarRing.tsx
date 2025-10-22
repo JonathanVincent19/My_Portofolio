@@ -1,4 +1,4 @@
-import { CSSProperties, memo, useMemo } from 'react'
+import { type CSSProperties, memo, useMemo } from 'react'
 
 type AvatarRingProps = {
   src: string

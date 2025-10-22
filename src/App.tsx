@@ -28,7 +28,7 @@ function Navbar() {
       style={{ backdropFilter: backdrop as unknown as string, WebkitBackdropFilter: backdrop as unknown as string}}
     >
       <motion.div
-        className="container flex items-center justify-between h-16"
+        className="container flex items-center justify-between h-16 px-4 md:px-6"
         initial={{ filter: 'blur(8px)', opacity: 0, y: -4 }}
         animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
         transition={{ duration: 1.6, ease: 'easeOut' }}
@@ -60,7 +60,7 @@ function Navbar() {
             <WavyBackground className="text-center">
           {/* TITLE */}
           <motion.h1
-            className="glitch text-5xl md:text-7xl font-extrabold tracking-tight -translate-y-6"
+            className="glitch text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight -translate-y-6 px-4"
             data-text="INITIALIZING DIGITAL EXPERIENCE"
             initial={{ opacity: 0, filter: "blur(12px)", y: 20 }}
             animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
@@ -71,17 +71,17 @@ function Navbar() {
 
           {/* SUBTITLE 1 */}
           <motion.p
-            className="mt-3 text-lg text-gray-300"
+            className="mt-3 text-sm sm:text-base md:text-lg text-gray-300 px-4"
             initial={{ opacity: 0, filter: "blur(8px)", y: 16 }}
             animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
             transition={{ delay: 0.3, duration: 1.5, ease: "easeOut" }}
           >
-            Web Developer | Crafting Interactive Web Experiences
+            Full Stack Developer | Designing and Developing Scalable Web Applications
           </motion.p>
 
           {/* SUBTITLE 2 */}
           <motion.p
-            className="mt-3 text-lg text-gray-300"
+            className="mt-3 text-sm sm:text-base md:text-lg text-gray-300 px-4"
             initial={{ opacity: 0, filter: "blur(8px)", y: 16 }}
             animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
             transition={{ delay: 0.6, duration: 1.5, ease: "easeOut" }}
@@ -93,7 +93,7 @@ function Navbar() {
         </WavyBackground>
 
           {/* SECTION: Hero */}
-      <main className="container pt-20 relative z-10" id="home">
+      <main className="container pt-20 px-4 md:px-6 relative z-10" id="home">
         <section className="relative grid md:grid-cols-2 gap-8 items-center">
           {/* SECTION: Hero (left) text block */}
           
@@ -107,7 +107,7 @@ function Navbar() {
             {/* SECTION: Heading "Hello, I'm" */}
             
             <motion.h1
-              className="mt-5 text-5xl md:text-4xl font-extrabold leading-tight"
+              className="mt-5 text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-extrabold leading-tight"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -117,7 +117,7 @@ function Navbar() {
             </motion.h1>
             {/* SECTION: Heading Name */}
             <motion.h2
-              className="mt-2 text-5xl md:text-6xl font-black tracking-tight text-[var(--color-name)]"
+              className="mt-2 text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black tracking-tight text-[var(--color-name)]"
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -146,11 +146,11 @@ function Navbar() {
               viewport={{ once: true }}
               transition={{ delay: 0.55, duration: 1.2 }}
             >
-              Saya adalah pembelajar yang meyakini bahwa pertumbuhan adalah mata uang utama. Didorong oleh keingintahuan, saya berkomitmen untuk terus mengasah keahlian dan beradaptasi dengan perubahan.
+              I’m a Full Stack Developer driven by curiosity and a passion for innovation. Every line of code is a small step toward better solutions and a more seamless user experience.
             </motion.p>
             {/* SECTION: CTAs */}
             <motion.div
-              className="mt-6 flex items-center gap-3"
+              className="mt-6 flex flex-wrap items-center gap-3"
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -165,7 +165,8 @@ function Navbar() {
                 whileInView={{ opacity: 1 }}
                 transition={{delay: 0.55, duration: 0.5 }}
                 variants={{ hidden: { y: 12, opacity: 0 }, show: { y: 0, opacity: 1 } }}
-                href="#cv"
+                href="/Users/jonathanvincent/my-portfolio/my-portfolio/public/Jonathan_Vincent_CV.pdf" 
+                download="Jonathan_Vincent_CV.pdf"
                 className="px-5 py-2 rounded-full btn-primary hover:bg-[--color-accent-600]"
               >
                 Download CV
@@ -242,13 +243,15 @@ function Navbar() {
           </motion.div>
           {/* SECTION: Hero (right) segmented avatar ring */}
           <motion.div
-            className="relative mx-auto"
+            className="relative mx-auto max-w-[280px] sm:max-w-[350px] md:max-w-[450px]"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 1.2, ease: 'easeOut' }}
           >
-            <AvatarRing src="/JOJO2.png" size={450} ringWidth={5} segments={16} visibleRatio={0.55} />
+            <div className="w-full">
+              <AvatarRing src="/JOJO2.png" size={450} ringWidth={5} segments={16} visibleRatio={0.55} className="w-full h-auto" />
+            </div>
           </motion.div>
         </section>
         {/* Placeholder sections for navigation links */}
@@ -260,7 +263,7 @@ function Navbar() {
               <div className="mt-2 text-[--color-muted]">Years of experience</div>
             </div>
             <div>
-              <div className="text-5xl font-extrabold"><Counter to={10} /></div>
+              <div className="text-5xl font-extrabold"><Counter to={4} /></div>
               <div className="mt-2 text-[--color-muted]">Projects completed</div>
             </div>
             <div>
@@ -626,7 +629,7 @@ function Navbar() {
 
       {/* ===== FOOTER ===== */}
       <footer id="contact" className="mt-40 border-t border-white/10 bg-[#0b0f13]">
-        <div className="container py-14">
+        <div className="container py-14 px-4 md:px-6">
           <div className="grid md:grid-cols-3 gap-10">
             {/* Contact */}
             <div>
