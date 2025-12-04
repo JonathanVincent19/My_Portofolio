@@ -1,5 +1,5 @@
 import './App.css'
-import { motion, useScroll, useTransform, useMotionTemplate } from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionTemplate, AnimatePresence } from 'framer-motion'
 import { Meteors } from './components/Meteors'
 import { AvatarRing } from './components/AvatarRing'
 import { WavyBackground } from './components/WavyBackground'
@@ -7,12 +7,293 @@ import { Counter } from './components/Counter'
 import { ArrowDown } from './components/ArrowDown'
 import { RotateWords } from "./components/RotateWords"
 import { MorphingText } from "./components/MorphingJV"
-import { Briefcase, Calendar, MapPin, GraduationCap, Mail, Linkedin, Github, Instagram, Globe } from "lucide-react";
+import { Briefcase, Calendar, MapPin, GraduationCap, Mail, Linkedin, Github, Instagram, Globe, X, User, Clock } from "lucide-react";
 import { BackgroundGradient } from "@/components/BgBox";
 import { LuGithub } from "react-icons/lu";
 import { LuVideo } from "react-icons/lu";
+import { useState } from 'react';
 
 
+
+// SECTION: Project Data Types
+interface Project {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  overview: string;
+  keyFeatures: string[];
+  challenges?: string[];
+  solutions?: string[];
+  technologies: string[];
+  images: string[];
+  category: string;
+  date: string;
+  role: string;
+  demoLink?: string;
+  githubLink?: string;
+}
+
+// SECTION: Projects Data
+const projects: Project[] = [
+  {
+    id: 'porsinara',
+    title: 'Porsinara Live Report',
+    subtitle: 'A live web-based competition report',
+    description: 'Real-time sports competition tracking platform for BINUS University inter-faculty events.',
+    overview: 'This project is built to provide real-time live reporting and score tracking for BINUS University\'s annual inter-faculty sports and arts competition. The platform enables students, faculty, and spectators to track live match scores, view faculty standings, and monitor competition progress across multiple events in real-time.',
+    keyFeatures: [
+      'Real-time Data Synchronization',
+      'Responsive Design',
+      'Medal Calculation',
+      'Live Match Updates',
+      'Faculty Standings Dashboard'
+    ],
+    challenges: ['Managing real-time data synchronization', 'Handling concurrent user access'],
+    solutions: ['Implemented efficient database queries', 'Used WebSocket for real-time updates'],
+    technologies: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS', 'Supabase'],
+    images: ['/porsinara.png'],
+    category: 'Web Development',
+    date: 'Dec 2025',
+    role: 'Full Stack Developer',
+    demoLink: 'https://porsinara.netlify.app',
+    githubLink: 'https://github.com/JonathanVincent19'
+  },
+  {
+    id: 'finapp',
+    title: 'FinApp',
+    subtitle: 'Solusi Cerdas Keuangan UMKM',
+    description: 'Easily manage sales and expenses by category, gain clear financial insights, and unlock AI-powered strategies to boost your business growth.',
+    overview: 'FinApp is a comprehensive financial management solution designed specifically for small and medium enterprises (UMKM). The application helps business owners track their income, expenses, and provides AI-powered insights for better business decisions.',
+    keyFeatures: [
+      'Sales and Expense Tracking',
+      'Category Management',
+      'Financial Insights Dashboard',
+      'AI-Powered Business Strategies',
+      'Real-time Reports'
+    ],
+    challenges: ['Integrating AI recommendations', 'Ensuring data security'],
+    solutions: ['Implemented secure authentication', 'Used encryption for sensitive data'],
+    technologies: ['React Native', 'Golang', 'MySQL'],
+    images: ['/Por2.png'],
+    category: 'Mobile Development',
+    date: 'Nov 2025',
+    role: 'Full Stack Developer',
+    demoLink: '#',
+    githubLink: 'https://github.com/JonathanVincent19/react-finance'
+  }
+];
+
+// SECTION: Project Detail Modal
+interface ProjectModalProps {
+  project: Project | null;
+  onClose: () => void;
+}
+
+function ProjectModal({ project, onClose }: ProjectModalProps) {
+  if (!project) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          transition={{ duration: 0.3 }}
+          className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden bg-white rounded-3xl shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-6 right-6 z-20 p-2 rounded-full bg-gray-800/80 hover:bg-gray-700 transition-colors"
+          >
+            <X className="w-6 h-6 text-white" />
+          </button>
+
+          {/* Category Badge */}
+          <div className="absolute top-6 right-20 z-20">
+            <span className="px-4 py-2 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white text-sm font-semibold shadow-lg">
+              {project.category}
+            </span>
+          </div>
+
+          {/* Scrollable Content */}
+          <div className="w-full h-full max-h-[90vh] overflow-y-auto">
+            {/* Hero Section with Images - Full Width Single Image */}
+            <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 md:p-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="relative w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-white"
+              >
+                {/* Single Full Width Image stretched horizontally */}
+                <img
+                  src={project.images[0]}
+                  alt={`${project.title} preview`}
+                  className="w-full h-auto object-cover"
+                />
+              </motion.div>
+            </div>
+
+            {/* Project Content - Dark Background */}
+            <div className="bg-[#0b0f13] p-6 md:p-8 space-y-6">
+              {/* Title */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <h2 className="text-3xl md:text-4xl font-extrabold text-white">{project.title}</h2>
+                <p className="mt-2 text-lg text-gray-400">{project.subtitle}</p>
+              </motion.div>
+
+              {/* Metadata */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex flex-wrap items-center gap-3 text-xs"
+              >
+                <span className="inline-flex items-center gap-1.5 text-gray-300">
+                  <Clock className="w-4 h-4 text-emerald-400" />
+                  {project.date}
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-gray-300">
+                  <User className="w-4 h-4 text-emerald-400" />
+                  {project.role}
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-gray-300">
+                  <Globe className="w-4 h-4 text-emerald-400" />
+                  {project.category}
+                </span>
+              </motion.div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Left Column */}
+                <div className="space-y-6">
+                  {/* Overview */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    <h3 className="text-xl font-bold text-emerald-400 mb-2">Project Overview</h3>
+                    <p className="text-gray-300 leading-relaxed text-sm">{project.overview}</p>
+                  </motion.div>
+
+                  {/* Key Features */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    <h3 className="text-xl font-bold text-emerald-400 mb-2">Key Features</h3>
+                    <ul className="list-disc marker:text-emerald-400 pl-5 space-y-1 text-gray-300 text-sm">
+                      {project.keyFeatures.map((feature, idx) => (
+                        <li key={idx}>{feature}</li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                </div>
+
+                {/* Right Column */}
+                <div className="space-y-6">
+                  {/* Challenges */}
+                  {project.challenges && project.challenges.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.7 }}
+                    >
+                      <h3 className="text-xl font-bold text-emerald-400 mb-2">Challenges</h3>
+                      <ul className="list-disc marker:text-emerald-400 pl-5 space-y-1 text-gray-300 text-sm">
+                        {project.challenges.map((challenge, idx) => (
+                          <li key={idx}>{challenge}</li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+
+                  {/* Solutions */}
+                  {project.solutions && project.solutions.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.8 }}
+                    >
+                      <h3 className="text-xl font-bold text-emerald-400 mb-2">Solutions</h3>
+                      <ul className="list-disc marker:text-emerald-400 pl-5 space-y-1 text-gray-300 text-sm">
+                        {project.solutions.map((solution, idx) => (
+                          <li key={idx}>{solution}</li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </div>
+              </div>
+
+              {/* Technologies */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9 }}
+              >
+                <h3 className="text-xl font-bold text-emerald-400 mb-2">Technologies Used</h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span key={tech} className="px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-xs font-medium">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Action Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 }}
+                className="flex flex-wrap gap-3 pt-2"
+              >
+                {project.demoLink && project.demoLink !== '#' && (
+                  <a
+                    href={project.demoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-2 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2"
+                  >
+                    <Globe size={18} />
+                    View Live Demo
+                  </a>
+                )}
+                {project.githubLink && (
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-sm font-semibold hover:bg-emerald-500/20 transition-all flex items-center gap-2"
+                  >
+                    <LuGithub size={18} />
+                    View Code
+                  </a>
+                )}
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
 
 // SECTION: Navbar (sticky)
 function Navbar() {
@@ -52,11 +333,14 @@ function Navbar() {
   );
 }
       function App() {
+        const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
         return (
             // SECTION: App root & global background meteors
             <>
             <Meteors className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" count={24} />
             <Navbar />
+            <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
             <WavyBackground className="text-center">
           {/* TITLE */}
           <motion.h1
@@ -557,71 +841,76 @@ function Navbar() {
 
         {/* Projects Grid */}
         <section className="container mt-20">
-          <div className="max-w-5xl mx-auto md:pl-6 grid md:grid-cols-2 gap-12 items-center">
-            {/* Media Panel (left) */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {projects.map((project, index) => (
             <motion.div
+                key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true }}
-            >
-              <BackgroundGradient className="relative p-4 md:p-6 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl">
-                
-                {/* 16:9 wide preview area */}
-                <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden border border-white/5 bg-gradient-to-b from-slate-800/60 to-slate-900/60">
-                <img
-                    src="/Por2.png" 
-                    alt="Preview"
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                </div>
-              </BackgroundGradient>
-            </motion.div>
+                className="group cursor-pointer"
+                onClick={() => setSelectedProject(project)}
+              >
+                <BackgroundGradient className="relative h-full p-4 md:p-6 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl hover:border-emerald-500/30 transition-all duration-300">
+                  {/* Category Badge */}
+                  <div className="absolute top-6 right-6 z-10">
+                    <span className="px-3 py-1 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white text-xs font-semibold shadow-lg">
+                      {project.category}
+                    </span>
+                  </div>
 
-            {/* Details Panel (right) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="text-left"
-            >
-              <h3 className="text-green-400 text-3xl md:text-4xl font-extrabold mt-2">FinApp</h3>
-              <h3 className="text-green-400 text-1xl md:text-2xl font-extrabold mt-2 mb-1">Solusi Cerdas Keuangan UMKM</h3>
-              <p className="mt-4 text-gray-300 max-w-xl">
-              Easily manage sales and expenses by category, gain clear financial insights, and unlock AI-powered strategies to boost your business growth.
-              </p>
+                  {/* Preview Image */}
+                  <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden border border-white/5 bg-gradient-to-b from-slate-800/60 to-slate-900/60 group-hover:border-emerald-500/30 transition-all">
+                    <img
+                      src={project.images[0]}
+                      alt={project.title}
+                      className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    {/* Overlay with "Click to view details" */}
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <div className="text-center">
+                        <p className="text-white text-xl font-bold">Click to view details</p>
+                        <p className="text-gray-300 text-sm mt-2">Learn more about this project</p>
+                </div>
+                    </div>
+                  </div>
+
+                  {/* Project Info */}
+                  <div className="mt-4 text-left">
+                    <h3 className="text-emerald-400 text-2xl md:text-3xl font-extrabold">{project.title}</h3>
+                    <p className="text-emerald-400/80 text-sm md:text-base font-semibold mt-1">{project.subtitle}</p>
+                    <p className="mt-3 text-gray-300 text-sm line-clamp-2">{project.description}</p>
 
               {/* Tech badges */}
-              <div className="mt-4 flex flex-wrap gap-3">
-                {['React Native','Golang','MySQL'].map((t) => (
-                  <span key={t} className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-sm">
-                    {t}
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {project.technologies.slice(0, 3).map((tech) => (
+                        <span key={tech} className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">
+                          {tech}
                   </span>
                 ))}
+                      {project.technologies.length > 3 && (
+                        <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">
+                          +{project.technologies.length - 3} more
+                        </span>
+                      )}
               </div>
 
-              {/* CTAs */}
-              <div className="mt-4 flex flex-wrap gap-4">
-                <a href="#" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-2 rounded-full btn-primary hover:bg-[--color-accent-600] flex items-center gap-2">
-                
-                  <LuVideo size={20} color=''/>
-                  Video Demo
-                  </a>
-                <a
-                  href="https://github.com/JonathanVincent19/react-finance"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-2 rounded-full btn-outline hover:bg-white/5 flex items-center gap-2"
-                >
-                  <LuGithub size={20} />
-                  Code
-                </a>
+                    {/* Meta Info */}
+                    <div className="mt-4 flex items-center gap-4 text-xs text-gray-400">
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        {project.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <User className="w-4 h-4" />
+                        {project.role}
+                      </span>
               </div>
+                  </div>
+                </BackgroundGradient>
             </motion.div>
+            ))}
           </div>
         </section>
 
