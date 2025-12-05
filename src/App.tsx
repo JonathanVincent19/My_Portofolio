@@ -7,7 +7,7 @@ import { Counter } from './components/Counter'
 import { ArrowDown } from './components/ArrowDown'
 import { RotateWords } from "./components/RotateWords"
 import { MorphingText } from "./components/MorphingJV"
-import { Briefcase, Calendar, MapPin, GraduationCap, Mail, Linkedin, Github, Instagram, Globe, X, User, Clock } from "lucide-react";
+import { Briefcase, Calendar, MapPin, GraduationCap, Mail, Linkedin, Github, Instagram, Globe, X, User, Clock, Lock } from "lucide-react";
 import { BackgroundGradient } from "@/components/BgBox";
 import { LuGithub } from "react-icons/lu";
 import { LuVideo } from "react-icons/lu";
@@ -32,6 +32,8 @@ interface Project {
   role: string;
   demoLink?: string;
   githubLink?: string;
+  status?: 'coming-soon' | 'active';
+  expectedDate?: string;
 }
 
 // SECTION: Projects Data
@@ -81,6 +83,27 @@ const projects: Project[] = [
     role: 'Full Stack Developer',
     demoLink: '#',
     githubLink: 'https://github.com/JonathanVincent19/react-finance'
+  },
+  {
+    id: 'coming-soon',
+    title: 'Secret Project',
+    subtitle: 'Something exciting is coming...',
+    description: 'A revolutionary new project that will transform the way you work. Stay tuned for the big reveal!',
+    overview: 'This project is currently in development. More details will be revealed soon!',
+    keyFeatures: [
+      'Coming Soon...',
+      'Stay Tuned!',
+      'Exciting Features Ahead'
+    ],
+    challenges: [],
+    solutions: [],
+    technologies: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS', 'Supabase'],
+    images: ['/OrderFlow.png'],
+    category: 'Web Development',
+    date: 'Coming Soon',
+    role: 'Full Stack Developer',
+    status: 'coming-soon',
+    expectedDate: '1 Week Later'
   }
 ];
 
@@ -113,14 +136,14 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 z-20 p-2 rounded-full bg-gray-800/80 hover:bg-gray-700 transition-colors"
+            className="absolute top-4 right-4 z-20 p-2 rounded-full bg-gray-800/80 hover:bg-gray-700 transition-colors"
           >
-            <X className="w-6 h-6 text-white" />
+            <X className="w-5 h-5 text-white" />
           </button>
 
           {/* Category Badge */}
-          <div className="absolute top-6 right-20 z-20">
-            <span className="px-4 py-2 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white text-sm font-semibold shadow-lg">
+          <div className="absolute top-4 right-16 z-20">
+            <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white text-sm font-semibold shadow-lg">
               {project.category}
             </span>
           </div>
@@ -145,15 +168,15 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
 
             {/* Project Content - Dark Background */}
-            <div className="bg-[#0b0f13] p-6 md:p-8 space-y-6">
+            <div className="bg-[#0b0f13] p-8 md:p-12 space-y-8">
               {/* Title */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <h2 className="text-3xl md:text-4xl font-extrabold text-white">{project.title}</h2>
-                <p className="mt-2 text-lg text-gray-400">{project.subtitle}</p>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">{project.title}</h2>
+                <p className="mt-3 text-lg text-gray-400">{project.subtitle}</p>
               </motion.div>
 
               {/* Metadata */}
@@ -161,33 +184,33 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="flex flex-wrap items-center gap-3 text-xs"
+                className="flex flex-wrap items-center gap-4 text-sm"
               >
-                <span className="inline-flex items-center gap-1.5 text-gray-300">
+                <span className="inline-flex items-center gap-2 text-gray-300">
                   <Clock className="w-4 h-4 text-emerald-400" />
                   {project.date}
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-gray-300">
+                <span className="inline-flex items-center gap-2 text-gray-300">
                   <User className="w-4 h-4 text-emerald-400" />
                   {project.role}
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-gray-300">
+                <span className="inline-flex items-center gap-2 text-gray-300">
                   <Globe className="w-4 h-4 text-emerald-400" />
                   {project.category}
                 </span>
               </motion.div>
 
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-10">
                 {/* Left Column */}
-                <div className="space-y-6">
+                <div className="space-y-8">
                   {/* Overview */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
                   >
-                    <h3 className="text-xl font-bold text-emerald-400 mb-2">Project Overview</h3>
-                    <p className="text-gray-300 leading-relaxed text-sm">{project.overview}</p>
+                    <h3 className="text-xl font-bold text-emerald-400 mb-3">Project Overview</h3>
+                    <p className="text-gray-300 leading-relaxed">{project.overview}</p>
                   </motion.div>
 
                   {/* Key Features */}
@@ -196,8 +219,8 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
                   >
-                    <h3 className="text-xl font-bold text-emerald-400 mb-2">Key Features</h3>
-                    <ul className="list-disc marker:text-emerald-400 pl-5 space-y-1 text-gray-300 text-sm">
+                    <h3 className="text-xl font-bold text-emerald-400 mb-3">Key Features</h3>
+                    <ul className="list-disc marker:text-emerald-400 pl-5 space-y-2 text-gray-300">
                       {project.keyFeatures.map((feature, idx) => (
                         <li key={idx}>{feature}</li>
                       ))}
@@ -206,7 +229,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </div>
 
                 {/* Right Column */}
-                <div className="space-y-6">
+                <div className="space-y-8">
                   {/* Challenges */}
                   {project.challenges && project.challenges.length > 0 && (
                     <motion.div
@@ -214,8 +237,8 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.7 }}
                     >
-                      <h3 className="text-xl font-bold text-emerald-400 mb-2">Challenges</h3>
-                      <ul className="list-disc marker:text-emerald-400 pl-5 space-y-1 text-gray-300 text-sm">
+                      <h3 className="text-xl font-bold text-emerald-400 mb-3">Challenges</h3>
+                      <ul className="list-disc marker:text-emerald-400 pl-5 space-y-2 text-gray-300">
                         {project.challenges.map((challenge, idx) => (
                           <li key={idx}>{challenge}</li>
                         ))}
@@ -230,8 +253,8 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.8 }}
                     >
-                      <h3 className="text-xl font-bold text-emerald-400 mb-2">Solutions</h3>
-                      <ul className="list-disc marker:text-emerald-400 pl-5 space-y-1 text-gray-300 text-sm">
+                      <h3 className="text-xl font-bold text-emerald-400 mb-3">Solutions</h3>
+                      <ul className="list-disc marker:text-emerald-400 pl-5 space-y-2 text-gray-300">
                         {project.solutions.map((solution, idx) => (
                           <li key={idx}>{solution}</li>
                         ))}
@@ -247,10 +270,10 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9 }}
               >
-                <h3 className="text-xl font-bold text-emerald-400 mb-2">Technologies Used</h3>
-                <div className="flex flex-wrap gap-2">
+                <h3 className="text-xl font-bold text-emerald-400 mb-3">Technologies Used</h3>
+                <div className="flex flex-wrap gap-3">
                   {project.technologies.map((tech) => (
-                    <span key={tech} className="px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-xs font-medium">
+                    <span key={tech} className="px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-sm font-medium">
                       {tech}
                     </span>
                   ))}
@@ -262,16 +285,16 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 }}
-                className="flex flex-wrap gap-3 pt-2"
+                className="flex flex-wrap gap-4 pt-4"
               >
                 {project.demoLink && project.demoLink !== '#' && (
                   <a
                     href={project.demoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 py-2 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2"
+                    className="px-6 py-2.5 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white font-semibold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2"
                   >
-                    <Globe size={18} />
+                    <Globe size={20} />
                     View Live Demo
                   </a>
                 )}
@@ -280,9 +303,9 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-sm font-semibold hover:bg-emerald-500/20 transition-all flex items-center gap-2"
+                    className="px-6 py-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 font-semibold hover:bg-emerald-500/20 transition-all flex items-center gap-2"
                   >
-                    <LuGithub size={18} />
+                    <LuGithub size={20} />
                     View Code
                   </a>
                 )}
@@ -806,7 +829,10 @@ function Navbar() {
       </motion.div>
     </section>
  </section>
-    <section id="projects" className="py-20 text-center">
+      </main>
+      
+    {/* SECTION: Projects - Outside main container for full width */}
+    <section id="projects" className="py-20 text-center w-full">
       {/* Title */}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
@@ -840,82 +866,114 @@ function Navbar() {
       </motion.div>
 
         {/* Projects Grid */}
-        <section className="container mt-20">
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {projects.map((project, index) => (
+        <section className="mt-20 px-6 md:px-12 lg:px-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+            {projects.map((project, index) => {
+              const isComingSoon = project.status === 'coming-soon';
+              
+              return (
             <motion.div
-                key={project.id}
+                  key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true }}
-                className="group cursor-pointer"
-                onClick={() => setSelectedProject(project)}
-              >
-                <BackgroundGradient className="relative h-full p-4 md:p-6 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl hover:border-emerald-500/30 transition-all duration-300">
-                  {/* Category Badge */}
-                  <div className="absolute top-6 right-6 z-10">
-                    <span className="px-3 py-1 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white text-xs font-semibold shadow-lg">
-                      {project.category}
-                    </span>
-                  </div>
+                  className={`group ${isComingSoon ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                  onClick={() => !isComingSoon && setSelectedProject(project)}
+                >
+                    <BackgroundGradient 
+                      className={`relative h-full p-5 md:p-6 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl transition-all duration-300 ${
+                        isComingSoon 
+                          ? 'opacity-80' 
+                          : 'hover:border-emerald-500/30'
+                      }`}
+                    >
+                      {/* Category Badge */}
+                      <div className="absolute top-5 right-5 z-10">
+                        <span className="px-3 py-1 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white text-xs font-semibold shadow-lg">
+                          {project.category}
+                        </span>
+                      </div>
 
-                  {/* Preview Image */}
-                  <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden border border-white/5 bg-gradient-to-b from-slate-800/60 to-slate-900/60 group-hover:border-emerald-500/30 transition-all">
-                    <img
-                      src={project.images[0]}
-                      alt={project.title}
-                      className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    {/* Overlay with "Click to view details" */}
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <div className="text-center">
-                        <p className="text-white text-xl font-bold">Click to view details</p>
-                        <p className="text-gray-300 text-sm mt-2">Learn more about this project</p>
-                </div>
+                      {/* Preview Image */}
+                      <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden bg-white group-hover:border-emerald-500/30 transition-all">
+                      <img
+                        src={project.images[0]}
+                        alt={project.title}
+                        className={`absolute inset-0 h-full w-full transition-transform duration-300 ${
+                          project.id === 'porsinara' ? 'object-cover' : 'object-contain'
+                        } ${
+                          isComingSoon ? 'blur-md scale-105' : 'group-hover:scale-105'
+                        }`}
+                      />
+                      
+                      {/* Coming Soon Overlay */}
+                      {isComingSoon ? (
+                        <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+                          <div className="text-center px-3">
+                            <Lock className="w-14 h-14 text-emerald-400 mx-auto mb-3 animate-pulse" />
+                            <p className="text-emerald-400 text-2xl font-extrabold tracking-wider animate-pulse glow-text">
+                              COMING SOON
+                            </p>
+                            <p className="text-gray-300 text-sm mt-2">
+                              📅 {project.expectedDate}
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        /* Normal Overlay with "Click to view details" */
+                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="text-center px-3">
+                            <p className="text-white text-lg font-bold">Click to view details</p>
+                            <p className="text-gray-300 text-sm mt-1">Learn more about this project</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
 
-                  {/* Project Info */}
-                  <div className="mt-4 text-left">
-                    <h3 className="text-emerald-400 text-2xl md:text-3xl font-extrabold">{project.title}</h3>
-                    <p className="text-emerald-400/80 text-sm md:text-base font-semibold mt-1">{project.subtitle}</p>
-                    <p className="mt-3 text-gray-300 text-sm line-clamp-2">{project.description}</p>
+                      {/* Project Info */}
+                      <div className="mt-5 text-left">
+                        <h3 className="text-emerald-400 text-2xl md:text-3xl font-extrabold line-clamp-2 leading-tight">{project.title}</h3>
+                        <p className="text-emerald-400/80 text-sm md:text-base font-semibold mt-2 line-clamp-1">{project.subtitle}</p>
+                        <p className="mt-3 text-gray-300 text-sm line-clamp-2 leading-relaxed">{project.description}</p>
 
               {/* Tech badges */}
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {project.technologies.slice(0, 3).map((tech) => (
-                        <span key={tech} className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">
-                          {tech}
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {project.technologies.slice(0, 3).map((tech) => (
+                            <span key={tech} className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs font-medium">
+                              {tech}
                   </span>
                 ))}
-                      {project.technologies.length > 3 && (
-                        <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs">
-                          +{project.technologies.length - 3} more
-                        </span>
-                      )}
+                          {project.technologies.length > 3 && (
+                            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs font-medium">
+                              +{project.technologies.length - 3}
+                            </span>
+                          )}
               </div>
 
-                    {/* Meta Info */}
-                    <div className="mt-4 flex items-center gap-4 text-xs text-gray-400">
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {project.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <User className="w-4 h-4" />
-                        {project.role}
-                      </span>
+                        {/* Meta Info */}
+                        <div className="mt-4 flex items-center gap-4 text-sm text-gray-400">
+                          <span className="flex items-center gap-1.5">
+                            <Clock className="w-4 h-4" />
+                            {project.date}
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <User className="w-4 h-4" />
+                            {project.role}
+                          </span>
               </div>
-                  </div>
-                </BackgroundGradient>
+                      </div>
+                  </BackgroundGradient>
             </motion.div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
       </section>
 
+      {/* Re-open main for footer with container */}
+      <main>
       {/* ===== FOOTER ===== */}
       <footer id="contact" className="mt-40 border-t border-white/10 bg-[#0b0f13]">
         <div className="container py-14 px-4 md:px-6">
