@@ -85,25 +85,39 @@ const projects: Project[] = [
     githubLink: 'https://github.com/JonathanVincent19/react-finance'
   },
   {
-    id: 'coming-soon',
-    title: 'Secret Project',
-    subtitle: 'Something exciting is coming...',
-    description: 'A revolutionary new project that will transform the way you work. Stay tuned for the big reveal!',
-    overview: 'This project is currently in development. More details will be revealed soon!',
+    id: 'OrderFlow',
+    title: 'OrderFlow',
+    subtitle: 'Streamline Your Order Management',
+    description: 'A comprehensive order management system designed to help businesses efficiently track, process, and fulfill customer orders with real-time updates and analytics.',
+    overview: 'OrderFlow is a modern web application that revolutionizes order management for businesses of all sizes. Built with cutting-edge technologies, it provides an intuitive interface for managing orders from creation to fulfillment. The platform offers real-time order tracking, inventory management, customer relationship tools, and comprehensive analytics to help businesses optimize their operations and improve customer satisfaction.',
     keyFeatures: [
-      'Coming Soon...',
-      'Stay Tuned!',
-      'Exciting Features Ahead'
+      'Real-time Order Tracking and Status Updates',
+      'Comprehensive Dashboard with Analytics',
+      'Inventory Management Integration',
+      'Customer Management System',
+      'Automated Notifications and Alerts',
+      'Multi-user Role-based Access Control',
+      'Export and Reporting Capabilities'
     ],
-    challenges: [],
-    solutions: [],
+    challenges: [
+      'Implementing real-time order status synchronization across multiple users',
+      'Handling high-volume order processing efficiently',
+      'Creating an intuitive UI for complex order workflows',
+      'Ensuring data consistency in concurrent operations'
+    ],
+    solutions: [
+      'Leveraged Supabase real-time subscriptions for instant updates',
+      'Optimized database queries and implemented efficient caching strategies',
+      'Designed a clean, step-by-step workflow interface with clear visual indicators',
+      'Implemented optimistic UI updates and proper transaction handling'
+    ],
     technologies: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS', 'Supabase'],
     images: ['/OrderFlow.png'],
     category: 'Web Development',
-    date: 'Coming Soon',
+    date: 'Jan 2026',
     role: 'Full Stack Developer',
-    status: 'coming-soon',
-    expectedDate: '1 Week Later'
+    demoLink: 'https://order-flow-pos.vercel.app/',
+    githubLink: 'https://github.com/JonathanVincent19/OrderFlow_POS'
   }
 ];
 
