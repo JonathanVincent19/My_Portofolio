@@ -11,7 +11,7 @@ import { Briefcase, Calendar, MapPin, GraduationCap, Mail, Linkedin, Github, Ins
 import { BackgroundGradient } from "@/components/BgBox";
 import { LuGithub } from "react-icons/lu";
 import { LuVideo } from "react-icons/lu";
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 
 
@@ -34,6 +34,7 @@ interface Project {
   githubLink?: string;
   status?: 'coming-soon' | 'active';
   expectedDate?: string;
+  video?: string; // Optional video URL (local file path or external URL)
 }
 
 // SECTION: Projects Data
@@ -82,7 +83,8 @@ const projects: Project[] = [
     date: 'Nov 2025',
     role: 'Full Stack Developer',
     demoLink: '#',
-    githubLink: 'https://github.com/JonathanVincent19/react-finance'
+    githubLink: 'https://github.com/JonathanVincent19/react-finance',
+    video: '/FINAPP.mp4'
   },
   {
     id: 'OrderFlow',
@@ -118,6 +120,44 @@ const projects: Project[] = [
     role: 'Full Stack Developer',
     demoLink: 'https://order-flow-pos.vercel.app/',
     githubLink: 'https://github.com/JonathanVincent19/OrderFlow_POS'
+  },
+  {
+    id: 'bisindo',
+    title: 'BISINDO Learn',
+    subtitle: 'Aplikasi Belajar Bahasa Isyarat BISINDO',
+    description: 'Aplikasi Android interaktif untuk pembelajaran bahasa isyarat Indonesia (BISINDO) dengan fitur quiz gamified dan gesture recognition menggunakan machine learning.',
+    overview: 'BISINDO Learn adalah aplikasi mobile Android yang dirancang untuk memudahkan pembelajaran bahasa isyarat Indonesia (BISINDO) melalui pengalaman belajar yang interaktif dan engaging. Aplikasi ini menggabungkan teknologi machine learning untuk gesture recognition dengan sistem quiz yang gamified, memungkinkan pengguna belajar sambil berlatih secara langsung.',
+    keyFeatures: [
+      'Quiz Interaktif: Dua mode quiz dengan sistem leveling (Single Letter, Single Word, Two Words) dan berbagai tingkat kecepatan',
+      'Gesture Recognition: Deteksi gerakan tangan real-time menggunakan MediaPipe dan TensorFlow Lite untuk validasi jawaban',
+      'Kamus BISINDO: Referensi lengkap alfabet dan kosakata bahasa isyarat',
+      'Progress Tracking: Sistem tracking progress per level dengan statistik pembelajaran',
+      'Firebase Authentication: Integrasi Google Sign-In untuk personalisasi pengalaman'
+    ],
+    challenges: [
+      'Real-time gesture recognition dengan akurasi tinggi',
+      'User experience yang smooth untuk pembelajaran'
+    ],
+    solutions: [
+      'Kombinasi MediaPipe untuk hand tracking dan custom TensorFlow Lite model untuk klasifikasi, dengan optimasi frame processing untuk mengurangi latency',
+      'Implementasi sistem leveling bertingkat dengan gamification, progress tracking, dan feedback visual yang jelas'
+    ],
+    technologies: [
+      'Kotlin',
+      'Jetpack Compose',
+      'Material3',
+      'CameraX',
+      'MediaPipe',
+      'TensorFlow Lite',
+      'Firebase Authentication'
+    ],
+    images: ['/BISINDO.png'],
+    category: 'Mobile Development',
+    date: 'Jan 2026',
+    role: 'Mobile Developer',
+    demoLink: '#',
+    githubLink: 'https://github.com/JonathanVincent19',
+    video: '/BISINDO.mp4' // Video path - ganti dengan path video Anda
   }
 ];
 
@@ -125,6 +165,66 @@ const projects: Project[] = [
 interface ProjectModalProps {
   project: Project | null;
   onClose: () => void;
+}
+
+// Video Player Component with Portrait Detection
+function VideoPlayer({ src }: { src: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPortrait, setIsPortrait] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleLoadedMetadata = () => {
+      const width = video.videoWidth;
+      const height = video.videoHeight;
+      // Jika tinggi lebih besar dari lebar, berarti portrait
+      setIsPortrait(height > width);
+    };
+
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    
+    // Jika metadata sudah loaded
+    if (video.readyState >= 1) {
+      handleLoadedMetadata();
+    }
+
+    return () => {
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    };
+  }, [src]);
+
+  return (
+    <div 
+      className="relative w-full bg-black flex items-center justify-center"
+      style={{ 
+        aspectRatio: '16/9', 
+        overflow: 'hidden',
+        minHeight: '400px'
+      }}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        controls
+        className="w-full h-full object-contain"
+        preload="metadata"
+        playsInline
+        style={{
+          display: 'block',
+          // Untuk video portrait, scale agar fit landscape container
+          transform: isPortrait ? 'scale(1.8)' : 'none',
+          transformOrigin: 'center center',
+        }}
+        onError={(e) => {
+          console.error('Video load error:', e);
+        }}
+      >
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  );
 }
 
 function ProjectModal({ project, onClose }: ProjectModalProps) {
@@ -164,7 +264,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Scrollable Content */}
           <div className="w-full h-full max-h-[90vh] overflow-y-auto">
-            {/* Hero Section with Images - Full Width Single Image */}
+            {/* Hero Section with Video or Image */}
             <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 md:p-6">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -172,12 +272,17 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                 transition={{ delay: 0.1 }}
                 className="relative w-full rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-white"
               >
-                {/* Single Full Width Image stretched horizontally */}
-                <img
-                  src={project.images[0]}
-                  alt={`${project.title} preview`}
-                  className="w-full h-auto object-cover"
-                />
+                {/* Video Player (if video exists) */}
+                {project.video ? (
+                  <VideoPlayer src={project.video} />
+                ) : (
+                  /* Fallback to Image */
+                  <img
+                    src={project.images[0]}
+                    alt={`${project.title} preview`}
+                    className="w-full h-auto object-cover"
+                  />
+                )}
               </motion.div>
             </div>
 
