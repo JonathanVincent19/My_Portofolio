@@ -184,7 +184,7 @@ function VideoPlayer({ src }: { src: string }) {
     };
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
-    
+
     // Jika metadata sudah loaded
     if (video.readyState >= 1) {
       handleLoadedMetadata();
@@ -196,10 +196,10 @@ function VideoPlayer({ src }: { src: string }) {
   }, [src]);
 
   return (
-    <div 
+    <div
       className="relative w-full bg-black flex items-center justify-center"
-      style={{ 
-        aspectRatio: '16/9', 
+      style={{
+        aspectRatio: '16/9',
         overflow: 'hidden',
         minHeight: '400px'
       }}
@@ -448,7 +448,7 @@ function Navbar() {
   return (
     <motion.header
       className="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-black/40 backdrop-blur-md"
-      style={{ backdropFilter: backdrop as unknown as string, WebkitBackdropFilter: backdrop as unknown as string}}
+      style={{ backdropFilter: backdrop as unknown as string, WebkitBackdropFilter: backdrop as unknown as string }}
     >
       <motion.div
         className="container flex items-center justify-between h-16 px-4 md:px-6"
@@ -457,10 +457,10 @@ function Navbar() {
         transition={{ duration: 1.6, ease: 'easeOut' }}
       >
         <a href="#home" className="text-xl font-bold tracking-tight">
-        <MorphingText
-        texts={["Vincent", "JV.", "Jonathan"]  }
-        className="text-[12px] md:text-[12px] -mt-2 -ml-1"
-        />
+          <MorphingText
+            texts={["Vincent", "JV.", "Jonathan"]}
+            className="text-[12px] md:text-[12px] -mt-2 -ml-1"
+          />
           <span className="text-[--color-accent]"></span>
         </a>
         <nav className="hidden sm:flex items-center gap-6 text-sm text-[--color-muted]">
@@ -474,64 +474,64 @@ function Navbar() {
     </motion.header>
   );
 }
-      function App() {
-        const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+function App() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-        return (
-            // SECTION: App root & global background meteors
-            <>
-            <Meteors className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" count={24} />
-            <Navbar />
-            <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
-            <WavyBackground className="text-center">
-          {/* TITLE */}
-          <motion.h1
-            className="glitch text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight -translate-y-6 px-4"
-            data-text="INITIALIZING DIGITAL EXPERIENCE"
-            initial={{ opacity: 0, filter: "blur(12px)", y: 20 }}
-            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            transition={{ duration: 1.8, ease: "easeOut" }}
-          >
-            INITIALIZING DIGITAL EXPERIENCE
-          </motion.h1>
+  return (
+    // SECTION: App root & global background meteors
+    <>
+      <Meteors className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" count={24} />
+      <Navbar />
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      <WavyBackground className="text-center">
+        {/* TITLE */}
+        <motion.h1
+          className="glitch text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight -translate-y-6 px-4"
+          data-text="INITIALIZING DIGITAL EXPERIENCE"
+          initial={{ opacity: 0, filter: "blur(12px)", y: 20 }}
+          animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
+        >
+          INITIALIZING DIGITAL EXPERIENCE
+        </motion.h1>
 
-          {/* SUBTITLE 1 */}
-          <motion.p
-            className="mt-3 text-sm sm:text-base md:text-lg text-gray-300 px-4"
-            initial={{ opacity: 0, filter: "blur(8px)", y: 16 }}
-            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            transition={{ delay: 0.3, duration: 1.5, ease: "easeOut" }}
-          >
-            Full Stack Developer | Designing and Developing Scalable Web Applications
-          </motion.p>
+        {/* SUBTITLE 1 */}
+        <motion.p
+          className="mt-3 text-sm sm:text-base md:text-lg text-gray-300 px-4"
+          initial={{ opacity: 0, filter: "blur(8px)", y: 16 }}
+          animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+          transition={{ delay: 0.3, duration: 1.5, ease: "easeOut" }}
+        >
+          Full Stack Developer | Designing and Developing Scalable Web Applications
+        </motion.p>
 
-          {/* SUBTITLE 2 */}
-          <motion.p
-            className="mt-3 text-sm sm:text-base md:text-lg text-gray-300 px-4"
-            initial={{ opacity: 0, filter: "blur(8px)", y: 16 }}
-            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            transition={{ delay: 0.6, duration: 1.5, ease: "easeOut" }}
-          >
-            Scroll down to see my experience
-          </motion.p>
+        {/* SUBTITLE 2 */}
+        <motion.p
+          className="mt-3 text-sm sm:text-base md:text-lg text-gray-300 px-4"
+          initial={{ opacity: 0, filter: "blur(8px)", y: 16 }}
+          animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+          transition={{ delay: 0.6, duration: 1.5, ease: "easeOut" }}
+        >
+          Scroll down to see my experience
+        </motion.p>
 
-          <ArrowDown />
-        </WavyBackground>
+        <ArrowDown />
+      </WavyBackground>
 
-          {/* SECTION: Hero */}
+      {/* SECTION: Hero */}
       <main className="container pt-20 px-4 md:px-6 relative z-10" id="home">
         <section className="relative grid md:grid-cols-2 gap-8 items-center">
           {/* SECTION: Hero (left) text block */}
-          
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: 1.4, ease: 'easeOut' }}
-              className="mb-4"
-            >
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 1.4, ease: 'easeOut' }}
+            className="mb-4"
+          >
             {/* SECTION: Heading "Hello, I'm" */}
-            
+
             <motion.h1
               className="mt-5 text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-extrabold leading-tight"
               initial={{ opacity: 0, y: 16 }}
@@ -553,17 +553,17 @@ function Navbar() {
             </motion.h2>
             {/* SECTION: Description 1 */}
             <div className="mt-2 flex items-start justify-start">
-               <RotateWords 
-                 text="And I'm a" // kalau ga mau ada kata di depannya
-                 words={[
-                   "Mobile Developer",
-                   "Front-end Developer",
-                   "Back-end Developer",
-                   "Web Developer"
-                 ]}
-                 className="text-[--color-muted] uppercase tracking-wide text-xs md:text-sm font-medium -ml-0 -mb-0 text-[var(--color-name)]"
-               />
-             </div>
+              <RotateWords
+                text="And I'm a" // kalau ga mau ada kata di depannya
+                words={[
+                  "Mobile Developer",
+                  "Front-end Developer",
+                  "Back-end Developer",
+                  "Web Developer"
+                ]}
+                className="text-[--color-muted] uppercase tracking-wide text-xs md:text-sm font-medium -ml-0 -mb-0 text-[var(--color-name)]"
+              />
+            </div>
             {/* SECTION: Description 2 */}
             <motion.p
               className="mt-4 text-sm md:text-base text-[--color-muted] max-w-xl"
@@ -589,9 +589,9 @@ function Navbar() {
                 initial={{ filter: 'blur(8px)', opacity: 0 }}
                 animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{delay: 0.55, duration: 0.5 }}
+                transition={{ delay: 0.55, duration: 0.5 }}
                 variants={{ hidden: { y: 12, opacity: 0 }, show: { y: 0, opacity: 1 } }}
-                href="/Jonathan_Vincent_CV.pdf" 
+                href="/Jonathan_Vincent_CV.pdf"
                 download="Jonathan_Vincent_CV.pdf"
                 className="px-5 py-2 rounded-full btn-primary hover:bg-[--color-accent-600]"
               >
@@ -601,7 +601,7 @@ function Navbar() {
                 initial={{ filter: 'blur(8px)', opacity: 0 }}
                 animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{delay: 0.55, duration: 0.5 }}
+                transition={{ delay: 0.55, duration: 0.5 }}
                 variants={{ hidden: { y: 12, opacity: 0 }, show: { y: 0, opacity: 1 } }}
                 href="https://github.com/JonathanVincent19"
                 target="_blank"
@@ -618,7 +618,7 @@ function Navbar() {
                 initial={{ filter: 'blur(8px)', opacity: 0 }}
                 animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{delay: 0.55, duration: 0.5 }}
+                transition={{ delay: 0.55, duration: 0.5 }}
                 variants={{ hidden: { y: 12, opacity: 0 }, show: { y: 0, opacity: 1 } }}
                 href="https://www.linkedin.com/in/jonathanvtimothy/"
                 target="_blank"
@@ -632,38 +632,38 @@ function Navbar() {
               </motion.a>
 
               <motion.a
-              initial={{ filter: 'blur(8px)', opacity: 0 }}
-              animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.55, duration: 0.5 }}
-              variants={{ hidden: { y: 12, opacity: 0 }, show: { y: 0, opacity: 1 } }}
-              href="https://www.instagram.com/jonathan.jon_/"
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="Open Instagram profile"
-              className="px-3 py-3 rounded-full btn-outline hover:bg-white/5 inline-flex items-center justify-center"
+                initial={{ filter: 'blur(8px)', opacity: 0 }}
+                animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.55, duration: 0.5 }}
+                variants={{ hidden: { y: 12, opacity: 0 }, show: { y: 0, opacity: 1 } }}
+                href="https://www.instagram.com/jonathan.jon_/"
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="Open Instagram profile"
+                className="px-3 py-3 rounded-full btn-outline hover:bg-white/5 inline-flex items-center justify-center"
               >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
                   <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zm4.5 3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 2A3.5 3.5 0 1 0 12 15a3.5 3.5 0 0 0 0-7zm5.25-.75a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z" />
-              </svg>
-            </motion.a>
+                </svg>
+              </motion.a>
 
-            <motion.a
-              initial={{ filter: 'blur(8px)', opacity: 0 }}
-              animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.55, duration: 0.5 }}
-              variants={{ hidden: { y: 12, opacity: 0 }, show: { y: 0, opacity: 1 } }}
-              href="https://wa.me/089637221403"
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="Open WhatsApp chat"
-              className="px-3 py-3 rounded-full btn-outline hover:bg-white/5 inline-flex items-center justify-center"
+              <motion.a
+                initial={{ filter: 'blur(8px)', opacity: 0 }}
+                animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.55, duration: 0.5 }}
+                variants={{ hidden: { y: 12, opacity: 0 }, show: { y: 0, opacity: 1 } }}
+                href="https://wa.me/089637221403"
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="Open WhatsApp chat"
+                className="px-3 py-3 rounded-full btn-outline hover:bg-white/5 inline-flex items-center justify-center"
               >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" className="h-5 w-5">
-              <path d="M16.003 3C9.37 3 3.998 8.373 4 15.006c0 2.65.87 5.1 2.342 7.084L4 29l7.133-2.312A11.95 11.95 0 0 0 16.003 27C22.636 27 28 21.627 28 14.994 28 8.373 22.636 3 16.003 3zm0 22c-1.873 0-3.615-.51-5.117-1.393l-.365-.217-4.24 1.373 1.385-4.133-.238-.373A9.923 9.923 0 0 1 6 15.006c0-5.522 4.478-10 10.003-10C21.526 5.006 26 9.484 26 15.006c0 5.522-4.474 9.994-9.997 9.994zm5.503-7.59c-.3-.15-1.777-.867-2.052-.967-.275-.1-.475-.15-.675.15-.2.3-.775.966-.95 1.166-.175.2-.35.225-.65.075-.3-.15-1.26-.465-2.397-1.48-.886-.79-1.484-1.767-1.659-2.067-.175-.3-.018-.462.132-.612.136-.136.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.616-.925-2.216-.25-.6-.5-.517-.675-.517-.175 0-.375-.025-.575-.025s-.525.075-.8.375c-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.116 3.225 5.125 4.525.717.309 1.275.494 1.71.633.718.228 1.372.196 1.887.119.575-.086 1.777-.726 2.027-1.426.25-.7.25-1.3.175-1.426-.075-.125-.275-.2-.575-.35z"/>
-              </svg>
-            </motion.a>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" className="h-5 w-5">
+                  <path d="M16.003 3C9.37 3 3.998 8.373 4 15.006c0 2.65.87 5.1 2.342 7.084L4 29l7.133-2.312A11.95 11.95 0 0 0 16.003 27C22.636 27 28 21.627 28 14.994 28 8.373 22.636 3 16.003 3zm0 22c-1.873 0-3.615-.51-5.117-1.393l-.365-.217-4.24 1.373 1.385-4.133-.238-.373A9.923 9.923 0 0 1 6 15.006c0-5.522 4.478-10 10.003-10C21.526 5.006 26 9.484 26 15.006c0 5.522-4.474 9.994-9.997 9.994zm5.503-7.59c-.3-.15-1.777-.867-2.052-.967-.275-.1-.475-.15-.675.15-.2.3-.775.966-.95 1.166-.175.2-.35.225-.65.075-.3-.15-1.26-.465-2.397-1.48-.886-.79-1.484-1.767-1.659-2.067-.175-.3-.018-.462.132-.612.136-.136.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.616-.925-2.216-.25-.6-.5-.517-.675-.517-.175 0-.375-.025-.575-.025s-.525.075-.8.375c-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.116 3.225 5.125 4.525.717.309 1.275.494 1.71.633.718.228 1.372.196 1.887.119.575-.086 1.777-.726 2.027-1.426.25-.7.25-1.3.175-1.426-.075-.125-.275-.2-.575-.35z" />
+                </svg>
+              </motion.a>
 
             </motion.div>
           </motion.div>
@@ -703,329 +703,326 @@ function Navbar() {
           </div>
         </section>
 
-        
+
         <section id="experience" className="py-20 text-center">
-      {/* Title */}
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-extrabold"
-      >
-        Experience & Education
-      </motion.h2>
-
-      {/* Subtitle */}
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 1 }}
-        viewport={{ once: true }}
-        className="mt-3 text-lg text-gray-300"
-      >
-        A summary of my organizational, work, and academic journey.
-      </motion.p>
-
-      {/* Gradient Line */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        transition={{ delay: 0.4, duration: 1 }}
-        viewport={{ once: true }}
-        className="mt-4 flex justify-center origin-left"
-      >
-        <div className="h-1 w-24 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600"></div>
-      </motion.div>
-
-      <section id="organizational-experience" className="py-16">
-      {/* Title with Icon */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="flex items-center gap-2"
-      >
-        {/* Icon */}
-        <Briefcase className="w-6 h-6 text-green-400" />
-        {/* Title */}
-        <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
-          Organizational Experience
-        </h3>
-      </motion.div>
-
-      {/* Content Container */}
-      <div className="mt-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <BackgroundGradient className="p-6 md:p-8 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl">
-            {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <div className="text-left">
-                <h4 className="text-2xl font-semibold text-white">First Year Program Leader</h4>
-                <a
-                  href="https://www.instagram.com/p/DJRNwP0SsI0/"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="inline-block mt-2 text-emerald-400 hover:text-emerald-300"
-                >
-                  First Year Program Binusian 2029
-                </a>
-              </div>
-              <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm">
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-300 px-2.5 py-1 border border-emerald-500/20">
-                  <Calendar className="w-4 h-4" />
-                  Mar 2025 - Jun 2026
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-300 px-2.5 py-1 border border-emerald-500/20">
-                  <MapPin className="w-4 h-4" />
-                  BINUS University
-                </span>
-              </div>
-            </div>
-
-            {/* Description */}
-            <p className="text-left text-gray-300 mt-4 leading-relaxed">
-            I led 20 Freshmen Leaders and coordinated activities for over 800 new
-            students, ensuring the orientation program ran smoothly and made a
-            positive impact. I designed teamwork- and integrity-focused activities
-            that enhanced collaboration, while serving as the main liaison between
-            the core committee and leaders, improving communication efficiency
-            and reducing task delays.
-            </p>
-
-            {/* Achievements */}
-            <div className="mt-6">
-              <h5 className="text-left text-emerald-400 font-semibold">Achievements:</h5>
-              <ul className="mt-3 text-left list-disc marker:text-emerald-400 pl-5 space-y-1 text-gray-300">
-                <li>On Progress</li>
-                {/* <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
-                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
-                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
-                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
-                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li> */}
-              </ul>
-            </div>
-          </BackgroundGradient>
-        </motion.div>
-      </div>
-
-      <div className="mt-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <BackgroundGradient className="p-6 md:p-8 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl">
-            {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <div className="text-left">
-                <h4 className="text-2xl font-semibold text-white">Freshmen Leader</h4>
-                <a
-                  href="https://www.instagram.com/p/DJRNwP0SsI0/"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="inline-block mt-2 text-emerald-400 hover:text-emerald-300"
-                >
-                  First Year Program Binusian 2028
-                </a>
-              </div>
-              <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm">
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-300 px-2.5 py-1 border border-emerald-500/20">
-                  <Calendar className="w-4 h-4" />
-                  Jun 2024 - Sep 2024
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-300 px-2.5 py-1 border border-emerald-500/20">
-                  <MapPin className="w-4 h-4" />
-                  BINUS University
-                </span>
-              </div>
-            </div>
-
-            {/* Description */}
-            <p className="text-left text-gray-300 mt-4 leading-relaxed">
-            I mentored more than 10 freshmen during their transition to
-            campus life, facilitating workshops and discussions that fostered
-            responsibility and teamwork, contributing to an orientation
-            program that achieved positive participant feedback.
-            </p>
-
-            {/* Achievements */}
-            <div className="mt-6">
-              <h5 className="text-left text-emerald-400 font-semibold">Achievements:</h5>
-              <ul className="mt-3 text-left list-disc marker:text-emerald-400 pl-5 space-y-1 text-gray-300">
-                <li>Master of Ceremony (MC) – FYP B2028 Inauguration 2024</li>
-                {/* <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
-                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
-                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
-                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
-                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li> */}
-              </ul>
-            </div>
-          </BackgroundGradient>
-        </motion.div>
-      
-      </div>  
-    </section>
-
-    {/* ===== EDUCATION ===== */}
-    <section id="education" className="py-12 text-left">
-      {/* Title with Icon */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="flex items-center gap-2"
-      >
-        <GraduationCap className="w-6 h-6 text-green-400" />
-        <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
-          Education
-        </h3>
-      </motion.div>
-
-      {/* Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="mt-6"
-      >
-        <BackgroundGradient className="w-full p-6 md:p-8 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl">
-          {/* Header row */}
-          <div className="flex items-start justify-between gap-4 md:flex-nowrap">
-            <h4 className="text-3xl md:text-4xl font-extrabold text-white">
-              Bachelor of Computer Science
-            </h4>
-            <span className="shrink-0 text-green-400 text-xl md:text-2xl font-semibold">3.24/4.0</span>
-          </div>
-
-          {/* University link */}
-          <a
-            href="https://binus.ac.id"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-block mt-3 text-xl font-semibold text-green-400 hover:text-emerald-300"
+          {/* Title */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-extrabold"
           >
-            Bina Nusantara University
-          </a>
+            Experience & Education
+          </motion.h2>
 
-          {/* Meta row */}
-          <div className="mt-3 flex flex-wrap items-center gap-4 text-gray-300">
-            <span className="inline-flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-gray-400" />
-              2023 - 2027
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-gray-400" />
-              Malang, Indonesia
-            </span>
-          </div>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 1 }}
+            viewport={{ once: true }}
+            className="mt-3 text-lg text-gray-300"
+          >
+            A summary of my organizational, work, and academic journey.
+          </motion.p>
 
-          {/* Details */}
-          <div className="mt-5 space-y-1 text-gray-300">
-            <p>Streaming: Digital Creative Technology</p>
-            <p>5 / 8 Semester</p>
-          </div>
+          {/* Gradient Line */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ delay: 0.4, duration: 1 }}
+            viewport={{ once: true }}
+            className="mt-4 flex justify-center origin-left"
+          >
+            <div className="h-1 w-24 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600"></div>
+          </motion.div>
 
-          {/* Achievements */}
-          <div className="mt-6">
-            <h5 className="text-green-400 font-semibold">Achievements:</h5>
-            <ul className="mt-3 list-disc marker:text-green-400 pl-5 space-y-2 text-gray-300">
-              <li>On Progres</li>
-              {/* <li></li>
+          <section id="organizational-experience" className="py-16">
+            {/* Title with Icon */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-2"
+            >
+              {/* Icon */}
+              <Briefcase className="w-6 h-6 text-green-400" />
+              {/* Title */}
+              <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+                Organizational Experience
+              </h3>
+            </motion.div>
+
+            {/* Content Container */}
+            <div className="mt-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <BackgroundGradient className="p-6 md:p-8 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl">
+                  {/* Header */}
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div className="text-left">
+                      <h4 className="text-2xl font-semibold text-white">First Year Program Leader</h4>
+                      <a
+                        href="https://www.instagram.com/p/DJRNwP0SsI0/"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-block mt-2 text-emerald-400 hover:text-emerald-300"
+                      >
+                        First Year Program Binusian 2029
+                      </a>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-300 px-2.5 py-1 border border-emerald-500/20">
+                        <Calendar className="w-4 h-4" />
+                        Mar 2025 - Jun 2026
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-300 px-2.5 py-1 border border-emerald-500/20">
+                        <MapPin className="w-4 h-4" />
+                        BINUS University
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-left text-gray-300 mt-4 leading-relaxed">
+                    I led 20 Freshmen Leaders and coordinated activities for over 800 new
+                    students, ensuring the orientation program ran smoothly and made a
+                    positive impact. I designed teamwork- and integrity-focused activities
+                    that enhanced collaboration, while serving as the main liaison between
+                    the core committee and leaders, improving communication efficiency
+                    and reducing task delays.
+                  </p>
+
+                  {/* Achievements */}
+                  <div className="mt-6">
+                    <h5 className="text-left text-emerald-400 font-semibold">Achievements:</h5>
+                    <ul className="mt-3 text-left list-disc marker:text-emerald-400 pl-5 space-y-1 text-gray-300">
+                      <li>On Progress</li>
+                      {/* <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
+                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
+                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
+                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
+                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li> */}
+                    </ul>
+                  </div>
+                </BackgroundGradient>
+              </motion.div>
+            </div>
+
+            <div className="mt-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <BackgroundGradient className="p-6 md:p-8 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl">
+                  {/* Header */}
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div className="text-left">
+                      <h4 className="text-2xl font-semibold text-white">Freshmen Leader</h4>
+                      <a
+                        href="https://www.instagram.com/p/DJRNwP0SsI0/"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-block mt-2 text-emerald-400 hover:text-emerald-300"
+                      >
+                        First Year Program Binusian 2028
+                      </a>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-300 px-2.5 py-1 border border-emerald-500/20">
+                        <Calendar className="w-4 h-4" />
+                        Jun 2024 - Sep 2024
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 text-emerald-300 px-2.5 py-1 border border-emerald-500/20">
+                        <MapPin className="w-4 h-4" />
+                        BINUS University
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-left text-gray-300 mt-4 leading-relaxed">
+                    I mentored more than 10 freshmen during their transition to
+                    campus life, facilitating workshops and discussions that fostered
+                    responsibility and teamwork, contributing to an orientation
+                    program that achieved positive participant feedback.
+                  </p>
+
+                  {/* Achievements */}
+                  <div className="mt-6">
+                    <h5 className="text-left text-emerald-400 font-semibold">Achievements:</h5>
+                    <ul className="mt-3 text-left list-disc marker:text-emerald-400 pl-5 space-y-1 text-gray-300">
+                      <li>Master of Ceremony (MC) – FYP B2028 Inauguration 2024</li>
+                      {/* <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
+                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
+                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
+                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li>
+                <li className="flex gap-3"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span>.</span></li> */}
+                    </ul>
+                  </div>
+                </BackgroundGradient>
+              </motion.div>
+
+            </div>
+          </section>
+
+          {/* ===== EDUCATION ===== */}
+          <section id="education" className="py-12 text-left">
+            {/* Title with Icon */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-2"
+            >
+              <GraduationCap className="w-6 h-6 text-green-400" />
+              <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+                Education
+              </h3>
+            </motion.div>
+
+            {/* Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="mt-6"
+            >
+              <BackgroundGradient className="w-full p-6 md:p-8 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl">
+                {/* Header row */}
+                <div className="flex items-start justify-between gap-4 md:flex-nowrap">
+                  <h4 className="text-3xl md:text-4xl font-extrabold text-white">
+                    Bachelor of Computer Science
+                  </h4>
+                  <span className="shrink-0 text-green-400 text-xl md:text-2xl font-semibold">3.27/4.0</span>
+                </div>
+
+                {/* University link */}
+                <a
+                  href="https://binus.ac.id"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-block mt-3 text-xl font-semibold text-green-400 hover:text-emerald-300"
+                >
+                  Bina Nusantara University
+                </a>
+
+                {/* Meta row */}
+                <div className="mt-3 flex flex-wrap items-center gap-4 text-gray-300">
+                  <span className="inline-flex items-center gap-2">
+                    <Calendar className="w-5 h-5 text-gray-400" />
+                    2023 - 2027
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-gray-400" />
+                    Malang, Indonesia
+                  </span>
+                </div>
+
+                {/* Details */}
+                <div className="mt-5 space-y-1 text-gray-300">
+                  <p>Streaming: Digital Creative Technology</p>
+                  <p>6 / 8 Semester</p>
+                </div>
+
+                {/* Achievements */}
+                <div className="mt-6">
+                  <h5 className="text-green-400 font-semibold">Achievements:</h5>
+                  <ul className="mt-3 list-disc marker:text-green-400 pl-5 space-y-2 text-gray-300">
+                    <li>On Progres</li>
+                    {/* <li></li>
               <li></li> */}
-            </ul>
-          </div>
-        </BackgroundGradient>
-      </motion.div>
-    </section>
- </section>
+                  </ul>
+                </div>
+              </BackgroundGradient>
+            </motion.div>
+          </section>
+        </section>
       </main>
-      
-    {/* SECTION: Projects - Outside main container for full width */}
-    <section id="projects" className="py-20 text-center w-full">
-      {/* Title */}
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-extrabold"
-      >
-        My Projects
-      </motion.h2>
 
-      {/* Subtitle */}
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 1 }}
-        viewport={{ once: true }}
-        className="mt-3 text-lg text-gray-300"
-      >
-        A collection of my recent projects and work portfolio.
-      </motion.p>
+      {/* SECTION: Projects - Outside main container for full width */}
+      <section id="projects" className="py-20 text-center w-full">
+        {/* Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-extrabold"
+        >
+          My Projects
+        </motion.h2>
 
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        transition={{ delay: 0.4, duration: 1 }}
-        viewport={{ once: true }}
-        className="mt-4 flex justify-center origin-left"
-      >
-        <div className="h-1 w-24 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600"></div>
-      </motion.div>
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 1 }}
+          viewport={{ once: true }}
+          className="mt-3 text-lg text-gray-300"
+        >
+          A collection of my recent projects and work portfolio.
+        </motion.p>
+
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ delay: 0.4, duration: 1 }}
+          viewport={{ once: true }}
+          className="mt-4 flex justify-center origin-left"
+        >
+          <div className="h-1 w-24 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600"></div>
+        </motion.div>
 
         {/* Projects Grid */}
         <section className="mt-20 px-6 md:px-12 lg:px-16">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             {projects.map((project, index) => {
               const isComingSoon = project.status === 'coming-soon';
-              
+
               return (
-            <motion.div
+                <motion.div
                   key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
+                  viewport={{ once: true }}
                   className={`group ${isComingSoon ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                   onClick={() => !isComingSoon && setSelectedProject(project)}
                 >
-                    <BackgroundGradient 
-                      className={`relative h-full p-5 md:p-6 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl transition-all duration-300 ${
-                        isComingSoon 
-                          ? 'opacity-80' 
-                          : 'hover:border-emerald-500/30'
+                  <BackgroundGradient
+                    className={`relative h-full p-5 md:p-6 rounded-2xl bg-[#11161b] border border-white/10 shadow-xl transition-all duration-300 ${isComingSoon
+                        ? 'opacity-80'
+                        : 'hover:border-emerald-500/30'
                       }`}
-                    >
-                      {/* Category Badge */}
-                      <div className="absolute top-5 right-5 z-10">
-                        <span className="px-3 py-1 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white text-xs font-semibold shadow-lg">
-                          {project.category}
-                        </span>
-                      </div>
+                  >
+                    {/* Category Badge */}
+                    <div className="absolute top-5 right-5 z-10">
+                      <span className="px-3 py-1 rounded-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 text-white text-xs font-semibold shadow-lg">
+                        {project.category}
+                      </span>
+                    </div>
 
-                      {/* Preview Image */}
-                      <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden bg-white group-hover:border-emerald-500/30 transition-all">
+                    {/* Preview Image */}
+                    <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden bg-white group-hover:border-emerald-500/30 transition-all">
                       <img
                         src={project.images[0]}
                         alt={project.title}
-                        className={`absolute inset-0 h-full w-full transition-transform duration-300 ${
-                          project.id === 'porsinara' ? 'object-cover' : 'object-contain'
-                        } ${
-                          isComingSoon ? 'blur-md scale-105' : 'group-hover:scale-105'
-                        }`}
+                        className={`absolute inset-0 h-full w-full transition-transform duration-300 ${project.id === 'porsinara' ? 'object-cover' : 'object-contain'
+                          } ${isComingSoon ? 'blur-md scale-105' : 'group-hover:scale-105'
+                          }`}
                       />
-                      
+
                       {/* Coming Soon Overlay */}
                       {isComingSoon ? (
                         <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
@@ -1050,40 +1047,40 @@ function Navbar() {
                       )}
                     </div>
 
-                      {/* Project Info */}
-                      <div className="mt-5 text-left">
-                        <h3 className="text-emerald-400 text-2xl md:text-3xl font-extrabold line-clamp-2 leading-tight">{project.title}</h3>
-                        <p className="text-emerald-400/80 text-sm md:text-base font-semibold mt-2 line-clamp-1">{project.subtitle}</p>
-                        <p className="mt-3 text-gray-300 text-sm line-clamp-2 leading-relaxed">{project.description}</p>
+                    {/* Project Info */}
+                    <div className="mt-5 text-left">
+                      <h3 className="text-emerald-400 text-2xl md:text-3xl font-extrabold line-clamp-2 leading-tight">{project.title}</h3>
+                      <p className="text-emerald-400/80 text-sm md:text-base font-semibold mt-2 line-clamp-1">{project.subtitle}</p>
+                      <p className="mt-3 text-gray-300 text-sm line-clamp-2 leading-relaxed">{project.description}</p>
 
-              {/* Tech badges */}
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {project.technologies.slice(0, 3).map((tech) => (
-                            <span key={tech} className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs font-medium">
-                              {tech}
-                  </span>
-                ))}
-                          {project.technologies.length > 3 && (
-                            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs font-medium">
-                              +{project.technologies.length - 3}
-                            </span>
-                          )}
-              </div>
-
-                        {/* Meta Info */}
-                        <div className="mt-4 flex items-center gap-4 text-sm text-gray-400">
-                          <span className="flex items-center gap-1.5">
-                            <Clock className="w-4 h-4" />
-                            {project.date}
+                      {/* Tech badges */}
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {project.technologies.slice(0, 3).map((tech) => (
+                          <span key={tech} className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs font-medium">
+                            {tech}
                           </span>
-                          <span className="flex items-center gap-1.5">
-                            <User className="w-4 h-4" />
-                            {project.role}
+                        ))}
+                        {project.technologies.length > 3 && (
+                          <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 text-xs font-medium">
+                            +{project.technologies.length - 3}
                           </span>
-              </div>
+                        )}
                       </div>
+
+                      {/* Meta Info */}
+                      <div className="mt-4 flex items-center gap-4 text-sm text-gray-400">
+                        <span className="flex items-center gap-1.5">
+                          <Clock className="w-4 h-4" />
+                          {project.date}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <User className="w-4 h-4" />
+                          {project.role}
+                        </span>
+                      </div>
+                    </div>
                   </BackgroundGradient>
-            </motion.div>
+                </motion.div>
               );
             })}
           </div>
@@ -1093,72 +1090,72 @@ function Navbar() {
 
       {/* Re-open main for footer with container */}
       <main>
-      {/* ===== FOOTER ===== */}
-      <footer id="contact" className="mt-40 border-t border-white/10 bg-[#0b0f13]">
-        <div className="container py-14 px-4 md:px-6">
-          <div className="grid md:grid-cols-3 gap-10">
-            {/* Contact */}
-            <div>
-              <h4 className="text-2xl font-bold text-emerald-400">Contact</h4>
-              <div className="mt-6 space-y-5 text-gray-300">
-                <div>
-                  <div className="text-sm text-gray-400">Email</div>
-                  <a href="mailto:your@email.com" className="hover:text-white">jthan730@email.com</a>
-                </div>
-                <div>
-                  <div className="text-sm text-gray-400">Location</div>
-                  <div>Malang, Indonesia</div>
-                </div>
-                <div>
-                  <div className="text-sm text-gray-400 mb-3">Socials</div>
-                  <div className="flex items-center gap-3">
-                    <a aria-label="LinkedIn" href="https://www.linkedin.com/in/jonathanvtimothy/" className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 inline-flex items-center justify-center"><Linkedin className="w-5 h-5"/></a>
-                    <a aria-label="GitHub" href="https://github.com/JonathanVincent19" className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 inline-flex items-center justify-center"><Github className="w-5 h-5"/></a>
-                    <a aria-label="Globe" href="#" className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 inline-flex items-center justify-center"><Globe className="w-5 h-5"/></a>
-                    <a aria-label="Instagram" href="https://www.instagram.com/jonathan.jon_/" className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 inline-flex items-center justify-center"><Instagram className="w-5 h-5"/></a>
+        {/* ===== FOOTER ===== */}
+        <footer id="contact" className="mt-40 border-t border-white/10 bg-[#0b0f13]">
+          <div className="container py-14 px-4 md:px-6">
+            <div className="grid md:grid-cols-3 gap-10">
+              {/* Contact */}
+              <div>
+                <h4 className="text-2xl font-bold text-emerald-400">Contact</h4>
+                <div className="mt-6 space-y-5 text-gray-300">
+                  <div>
+                    <div className="text-sm text-gray-400">Email</div>
+                    <a href="mailto:your@email.com" className="hover:text-white">jthan730@email.com</a>
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-400">Location</div>
+                    <div>Malang, Indonesia</div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-400 mb-3">Socials</div>
+                    <div className="flex items-center gap-3">
+                      <a aria-label="LinkedIn" href="https://www.linkedin.com/in/jonathanvtimothy/" className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 inline-flex items-center justify-center"><Linkedin className="w-5 h-5" /></a>
+                      <a aria-label="GitHub" href="https://github.com/JonathanVincent19" className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 inline-flex items-center justify-center"><Github className="w-5 h-5" /></a>
+                      <a aria-label="Globe" href="#" className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 inline-flex items-center justify-center"><Globe className="w-5 h-5" /></a>
+                      <a aria-label="Instagram" href="https://www.instagram.com/jonathan.jon_/" className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 inline-flex items-center justify-center"><Instagram className="w-5 h-5" /></a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Skills */}
-            <div className="md:border-l md:border-white/10 md:pl-8">
-              <h4 className="text-2xl font-bold text-emerald-400">Skills</h4>
-              <div className="mt-6 space-y-6 text-gray-300">
-                <div>
-                  <div className="font-semibold">Frontend:</div>
-                  <div className="mt-1 text-gray-400">React, JavaScript, Java, HTML/CSS, React Native, Kotlin</div>
-                </div>
-                <div>
-                  <div className="font-semibold">Backend:</div>
-                  <div className="mt-1 text-gray-400">Golang, MySQL</div>
-                </div>
-                <div>
-                  <div className="font-semibold">Design:</div>
-                  <div className="mt-1 text-gray-400">Figma</div>
+              {/* Skills */}
+              <div className="md:border-l md:border-white/10 md:pl-8">
+                <h4 className="text-2xl font-bold text-emerald-400">Skills</h4>
+                <div className="mt-6 space-y-6 text-gray-300">
+                  <div>
+                    <div className="font-semibold">Frontend:</div>
+                    <div className="mt-1 text-gray-400">React, JavaScript, Java, HTML/CSS, React Native, Kotlin</div>
+                  </div>
+                  <div>
+                    <div className="font-semibold">Backend:</div>
+                    <div className="mt-1 text-gray-400">Golang, MySQL</div>
+                  </div>
+                  <div>
+                    <div className="font-semibold">Design:</div>
+                    <div className="mt-1 text-gray-400">Figma</div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Services */}
-            <div className="md:border-l md:border-white/10 md:pl-8">
-              <h4 className="text-2xl font-bold text-emerald-400">Services</h4>
-              <ul className="mt-6 space-y-3 text-gray-300">
-                <li>Front-end Development</li>
-                <li>Back-end Development</li>
-                <li>UI/UX Design & Prototyping</li>
-                <li>Custom Web Development</li>
-                <li>Mobile App Development</li>
-              </ul>
+              {/* Services */}
+              <div className="md:border-l md:border-white/10 md:pl-8">
+                <h4 className="text-2xl font-bold text-emerald-400">Services</h4>
+                <ul className="mt-6 space-y-3 text-gray-300">
+                  <li>Front-end Development</li>
+                  <li>Back-end Development</li>
+                  <li>UI/UX Design & Prototyping</li>
+                  <li>Custom Web Development</li>
+                  <li>Mobile App Development</li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-10 pt-6 border-t border-white/10 text-center text-sm text-gray-400">
+              Copyright © {new Date().getFullYear()} Jonathan Vincent • Made with <span className="text-rose-400">❤</span> and lots of McDonald's.
             </div>
           </div>
-          <div className="mt-10 pt-6 border-t border-white/10 text-center text-sm text-gray-400">
-            Copyright © {new Date().getFullYear()} Jonathan Vincent • Made with <span className="text-rose-400">❤</span> and lots of McDonald's.
-          </div>
-        </div>
-      </footer>
+        </footer>
       </main>
-      </>
+    </>
   );
 }
 
